@@ -8,30 +8,30 @@ body{
 	font-size:12px; 
 	color:#000; 
 	font-family:helvetica, arial, sans-serif;
-	background-color:#537036;
+	background-color:#6D85F2;
 	text-align:center;
 }
 
-#blocoCabecalho, #blocoConteudo, #blocoRodape{
+#header, #content, #footer{
 	width:100%;
 	height:auto;
 	position:relative;
 	padding:10px 0px;
 }
 
-#blocoCabecalho{
-	background-color:#537036;
+#header{
+	background-color:#6D85F2;
 	height: 50px;
 }
-#blocoConteudo{
+#content{
 	background-color:#FFF;
 }
-#blocoRodape{ 
+#footer{ 
 	font-size:10px; 
 	color:#FFF;
 }
 
-#logoCompany, #blocoConteudo h2, #blocoConteudo form .campos, #usuarioLogado {
+#logoCompany, #content h2, #content form .campos, #usuarioLogado {
 	display:block;
 	position:relative;
 	overflow:hidden;	
@@ -47,7 +47,7 @@ body{
 	width:auto;
 }
 
-#blocoConteudo h2{
+#content h2{
 	font-size:2em;
 	color:#2B2926;
 	text-align:left;
@@ -57,36 +57,36 @@ body{
 	border-bottom:solid 1px #252210;
 }
 
-#blocoConteudo table.dados{
+#content table.data{
 	width:800px;
 	height:auto;
 }
 
-#blocoConteudo table.dados tr th{
-	background-color:#0B190F;
+#content table.data tr th{
+	background-color:#0B0F19;
 	color:#fff;
 	color:1em;
 	padding:10px;
 }
 
-#blocoConteudo table.dados tr td{
+#content table.data tr td{
 	padding:5px 10px;
 }
 
 /*basic configuration forms*/		
-#blocoConteudo form{
+#content form{
 	margin-bottom:15px;
 }
 
 /*///////////////*/
 /*Footer internal*/
-#blocoRodape a{
+#footer a{
 	color:#FFE773;
 	text-decoration:none;
 }
 
-#blocoRodape a:hover{
-	color:#6DD589;
+#footer a:hover{
+	color:#6D89D5;
 	text-decoration:underline;
 }
 
@@ -119,20 +119,20 @@ input[type="submit"] {
 	padding:3px;
 }
 
-.dados {
+.data {
 	width: 100%;	
 }
 
-.dados thead tr th, .dados tbody tr td {
+.data thead tr th, .data tbody tr td {
 	padding: 0px 10px 0px 10px;	
 }
 
-.par  {
-	background-color: #F0FFF9;
+.even  {
+	background-color: #F0F9FF;
 }
 
-.impar {
-	background:none repeat scroll 0 0 #DDDDB3;
+.odd {
+	background:none repeat scroll 0 0 #DDDDDD;
 }
 
 form fieldset {
@@ -149,7 +149,6 @@ form fieldset legend {
 	font-weight: bold;
 	font-size: medium;
 	padding: 0px 5px;
-
 }
 
 label{
