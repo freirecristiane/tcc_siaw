@@ -36,24 +36,12 @@ public class UserStory extends Issue {
 		return tasks;
 	}
 
-	public void setTasks(List<Task> tasks) {
-		this.tasks = tasks;
-	}
-
 	public List<Bug> getBugs() {
 		return bugs;
 	}
 
-	public void setBugs(List<Bug> bugs) {
-		this.bugs = bugs;
-	}
-
 	public List<Planning> getPlannings() {
 		return plannings;
-	}
-
-	public void setPlannings(List<Planning> plannings) {
-		this.plannings = plannings;
 	}
 
 	public List<Review> getReviews() {
