@@ -13,7 +13,7 @@ public abstract class Issue {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 	
 	@ManyToOne
 	private Project project;
@@ -34,7 +34,7 @@ public abstract class Issue {
 	@ManyToOne
 	private Sprint sprint;
 		
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
@@ -97,7 +97,4 @@ public abstract class Issue {
 	public void setIssueStatus(IssueStatus issueStatus) {
 		this.issueStatus = issueStatus;
 	}
-	
-	
-	
 }
