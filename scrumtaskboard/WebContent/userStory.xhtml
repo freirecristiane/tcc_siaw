@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:body>
+		<ui:composition template="template.xhtml">
+			<ui:define name="content">
+				<div id="content">
+					<div class="container">
+						<h:messages/>
+						<h2>User Story Management</h2>
+						<h:form id="data">
+							<fieldset>
+								<legend>User Story Data</legend>
+								<h:panelGrid columns="2">
+									<h:outputLabel value="ID" for="id" rendered="#{userStoryBean.userStory.id != null}"/>
+									<h:inputText id="id" value="#{userStoryBean.userStory.id}" rendered="#{userStoryBean.userStory.id != null}" readonly="true"/>
+									
+									<h:outputLabel value="Project:"/>
+									<h:selectOneMenu value="#{userStoryBean.userStory.project}">
+										<f:selectItem itemLabel="Select..." itemValue=""/>
+										<f:selectItems value="#{Project.projects}" var="p" itemValue="#{p.id}" itemLabel="#{p.name}"/>
+									</h:selectOneMenu>
+												
+									<h:outputLabel value="Type:"/>
+									<h:selectOneMenu value="#{userStoryBean.userStory.issueType}">
+										<f:selectItem itemLabel="Select..." itemValue=""/>
+										<f:selectItems value="#{userStoryBean.issueTypes}" var="it" itemValue="#{it}" itemLabel="#{it.label}"/>
+									</h:selectOneMenu>
+									
+									<h:outputLabel value="Summary:" for="summary"/>
+									<h:inputText id="summary" value="#{userStoryBean.userStory.summary}"/>
+									
+									<h:outputLabel value="Priority:"/>
+									<h:selectOneMenu value="#{userStoryBean.userStory.priority}">
+										<f:selectItem itemLabel="Select..." itemValue=""/>
+										<f:selectItems value="#{userStoryBean.priorities}" var="p" itemValue="#{p.value}" itemLabel="#{p.label}"/>
+									</h:selectOneMenu>
+									
+									<h:outputLabel value="Description:" for="description"/>
+									<h:inputText id="description" value="#{userStoryBean.userStory.description}"/>
+									
+									<h:outputLabel value="Status:"/>
+									<h:selectOneMenu value="#{userStoryBean.userStory.issueStatus}">
+										<f:selectItem itemLabel="Select..." itemValue=""/>
+										<f:selectItems value="#{userStoryBean.issueStatuses}" var="is" itemValue="#{is}" itemLabel="#{is.label}"/>
+									</h:selectOneMenu>
+									
+									<h:outputLabel value="Sprint:" for="sprint"/>
+									<h:selectOneMenu value="#{userStoryBean.userStory.sprint}">
+										<f:selectItem itemLabel="Select..." itemValue=""/>
+										<f:selectItems value="#{Sprint.sprints}" var="s" itemValue="#{s.id}" itemLabel="#{s.name}"/>
+									</h:selectOneMenu>
+									
+									<h:outputLabel value="Story Point:" for="storyPoint"/>
+									<h:inputText id="storyPoint" value="#{userStoryBean.userStory.storyPoint}"/>
+									
+									<h:commandButton value="Save" action="#{userStoryBean.userStory.save}"/>
+								</h:panelGrid>
+							</fieldset>
+						</h:form>
+						
+						<h2>User Stories List</h2>
+						<h:form id="table">
+							<h:dataTable value="#{userStoryBean.userStories}" var="userStory" styleClass="data" rowClasses="odd,even">
+								<h:column>
+									<f:facet name="header">
+										<h:outputText value="Project"/>
+									</f:facet>
+									<h:outputText value="#{userStory.project}"/>
+								</h:column>
+								
+								<h:column>
+									<f:facet name="header">
+										<h:outputText value="Type"/>
+									</f:facet>
+									<h:outputText value="#{userStory.issueType}"/>
+								</h:column>
+								
+								<h:column>
+									<f:facet name="header">
+										<h:outputText value="Summary"/>
+									</f:facet>
+									<h:outputText value="#{userStory.summary}"/>
+								</h:column>
+								
+								<h:column>
+									<f:facet name="header">
+										<h:outputText value="Priority"/>
+									</f:facet>
+									<h:outputText value="#{userStory.priority}"/>
+								</h:column>
+								
+								
+								<h:column>
+									<f:facet name="header">
+										<h:outputText value="Description"/>
+									</f:facet>
+									<h:outputText value="#{userStory.description}"/>
+								</h:column>
+								
+								<h:column>
+									<f:facet name="header">
+										<h:outputText value="Status"/>
+									</f:facet>
+									<h:outputText value="#{userStory.issueStatus}"/>
+								</h:column>
+								
+								<h:column>
+									<f:facet name="header">
+										<h:outputText value="Sprint"/>
+									</f:facet>
+									<h:outputText value="#{userStory.sprint}"/>
+								</h:column>
+								
+								<h:column>
+									<f:facet name="header">
+										<h:outputText value="Assignee"/>
+									</f:facet>
+									<h:outputText value="#{userStory.userStory}"/>
+								</h:column>
+								
+								<h:column>
+									<f:facet name="header">
+										<h:outputText value="Affected Version"/>
+									</f:facet>
+									<h:outputText value="#{userStory.affectedVersion}"/>
+								</h:column>
+								
+								<h:column>
+									<f:facet name="header">
+										<h:outputText value="Environment"/>
+									</f:facet>
+									<h:outputText value="#{userStory.environment}"/>
+								</h:column>
+								
+								<h:column>
+									<f:facet name="header">
+										<h:outputText value="Fix Version"/>
+									</f:facet>
+									<h:outputText value="#{userStory.fixVersion}"/>
+								</h:column>
+								
+								<h:column>
+									<f:facet name="header">
+										<h:outputText value="Story Point"/>
+									</f:facet>
+									<h:outputText value="#{userStory.storyPoint}"/>
+								</h:column>
+								
+								<h:column>
+									<f:facet name="header">
+										<h:outputText value="Actions"/>
+									</f:facet>
+									<h:commandLink action="#{userStoryBean.delete}" value="Delete">
+										<f:ajax render="@form"/>
+										<f:setPropertyActionListener target="#{userStoryBean.userStory}" value="#{userStory}"/>
+									</h:commandLink>
+								</h:column>
+								<h:column>
+									<h:commandLink value="Update">
+										<f:setPropertyActionListener target="#{userStoryBean.userStory}" value="#{userStory}"/>
+									</h:commandLink>
+								</h:column>
+							</h:dataTable>
+						</h:form>
+					</div>
+				</div>
+			</ui:define>
+		</ui:composition>
+	</h:body>
+</html>

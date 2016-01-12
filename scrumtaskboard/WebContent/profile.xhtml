@@ -1,91 +1,97 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:f="http://java.sun.com/jsf/core"
-	  xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
 
-	<f:view contentType="text/html"/>
-	<h:head>
-		<title>Scrum Task Board</title>
-		<h:outputStylesheet library="css" name="grid.css"/>
-		<h:outputStylesheet library="css" name="style.css"/>
-	</h:head>
-	<h:body>
-		<div id="header">
-			<div class="container">
-				<h:graphicImage library="imagens" name="logo-uber.png" id="logoCompany"/>
+<h:body>
+	<ui:composition template="template.xhtml">
+		<ui:define name="content">
+			<div id="content">
+				<div class="container">
+					<h:messages />
+					<h2>Profile Management</h2>
+					<h:form id="data">
+						<fieldset>
+							<legend>Profile data</legend>
+							<h:panelGrid columns="2">
+								<h:outputLabel value="ID" for="id" rendered="#{profileBean.profile.id != null}" />
+								<h:inputText id="id" value="#{profileBean.profile.id}" rendered="#{profileBean.profile.id != null}" readonly="true" />
+
+								<h:outputLabel value="Name" for="name" />
+								<h:inputText id="name" value="#{profileBean.profile.name}" />
+
+								<h:outputLabel value="Description" for="description" />
+								<h:inputText id="description" value="#{profileBean.profile.description}" />
+
+								<h:outputLabel value="Permission" for="permission" />
+								<h:inputText id="permission" value="#{profileBean.profile.permission}" />
+
+								<h:commandButton value="Save" action="#{profileBean.save}"/>
+							</h:panelGrid>
+						</fieldset>
+					</h:form>
+
+					<h2>Profiles List</h2>
+					<h:form id="form">
+						<p:growl id="msgs" showDetail="true"/>
+						<p:dataTable value="#{profileBean.profiles}" var="profile" editable="true" draggableColumns="true">
+						
+							<p:ajax event="rowEdit" listener="#{profileBean.onRowEdit}" update="@this :form:msgs"/>
+						    <p:ajax event="rowEditCancel" listener="#{profileBean.onRowCancel}" update=":form:msgs"/>
+						       
+							<p:columnGroup type="header" >
+								<p:row>
+									<p:column headerText="ID"/>
+									<p:column headerText="Name" />
+									<p:column headerText="Description" />
+									<p:column headerText="Permission" />
+									<p:column colspan="2" headerText="Actions" />
+								</p:row>
+							</p:columnGroup>
+							
+							<p:column>
+								<h:outputText value="#{profile.id}" />
+							</p:column>
+							
+							<p:column>
+								<p:cellEditor>
+									<f:facet name="output"><h:outputText value="#{profile.name}"/></f:facet>
+									<f:facet name="input"><h:inputText value="#{profile.name}"/></f:facet>
+								</p:cellEditor>
+							</p:column>
+							
+							<p:column>
+								<p:cellEditor>
+									<f:facet name="output"><h:outputText value="#{profile.description}"/></f:facet>
+									<f:facet name="input"><h:inputText value="#{profile.description}"/></f:facet>
+								</p:cellEditor>
+							</p:column>
+							
+							<p:column>
+								<p:cellEditor>
+									<f:facet name="output"><h:outputText value="#{profile.permission}"/></f:facet>
+									<f:facet name="input"><h:inputText value="#{profile.permission}"/></f:facet>
+								</p:cellEditor>
+							</p:column>
+							
+							<p:column width="20px">
+								<p:rowEditor cancelTitle="Cancel" editTitle="Edit" saveTitle="Save"/>
+							</p:column>
+							
+							<p:column>
+								<h:commandLink action="#{profileBean.delete}" value="Delete">
+									<f:ajax render="@form" />
+									<f:setPropertyActionListener target="#{profileBean.profile}" value="#{profile}" />
+								</h:commandLink>
+							</p:column>
+						</p:dataTable>
+					</h:form>
+				</div>
 			</div>
-		</div>
-		<div id="content">
-			<div class="container">
-			
-				<h:messages/>
-				<h2>Profiles</h2>
-				<h:form id="dados">
-					<fieldset>
-						<legend>Profile data</legend>
-						<h:panelGrid columns="2">
-							<h:outputLabel value="ID:" for="id" rendered="#{profileBean.profile.id != null}"/>
-							<h:inputText id="id" value="#{profileBean.profile.id}" rendered="#{profileBean.profile.id != null}" readonly="true"/>
-							
-							<h:outputLabel value="Name:" for="name"/>
-							<h:inputText id="name" value="#{profileBean.profile.name}"/>
-							
-							<h:outputLabel value="Description:" for="description"/>
-							<h:inputText id="description" value="#{profileBean.profile.description}"/>
-							
-							<h:outputLabel value="Permission:" for="permission"/>
-							<h:inputText id="permission" value="#{profileBean.profile.permission}"/>
-							
-							<h:commandButton value="Save" action="#{profileBean.save}">
-								<f:ajax render="@form"/>
-							</h:commandButton>
-						</h:panelGrid>
-					</fieldset>
-				</h:form>
-				<h2>Profiles List</h2>
-				<h:form>
-					<h:dataTable value="#{profileBean.profiles}" var="profile" styleClass="dados" rowClasses="impar,par">
-						<h:column>
-							<f:facet name="header">
-								<h:outputText value="Name"/>
-							</f:facet>
-							#{profile.name}
-						</h:column>
-						<h:column>
-							<f:facet name="header">
-								<h:outputText value="Description"/>
-							</f:facet>
-							#{profile.description}
-						</h:column>
-						<h:column>
-							<f:facet name="header">
-								<h:outputText value="Permission"/>
-							</f:facet>
-							#{profile.permission}
-						</h:column>
-						<h:column>
-							<f:facet name="header">
-								<h:outputText value="Actions"/>
-							</f:facet>
-							<h:commandLink action="#{profileBean.delete}" value="Delete">
-								<f:ajax render="@form"/>
-								<f:setPropertyActionListener target="#{profileBean.profile}" value="#{profile}"/>
-							</h:commandLink>
-						</h:column>
-						<h:column>
-							<h:commandLink value="Update">
-								<f:setPropertyActionListener target="#{profileBean.profile}" value="#{profile}"/>
-							</h:commandLink>
-						</h:column>
-					</h:dataTable>
-				</h:form>
-			</div>
-		</div>
-		<div id="footer">
-			<div class="container">
-				<p>Copyright 2015. All rights reserved.</p>
-			</div>
-		</div>
-	</h:body>
+		</ui:define>
+	</ui:composition>
+</h:body>
 </html>

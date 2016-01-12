@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:body>
+		<ui:composition template="template.xhtml">
+			<ui:define name="content">
+				<div id="content">
+					<div class="container">
+						<h:messages/>
+						<h2>Project Management</h2>
+						<h:form id="data">
+							<fieldset>
+								<legend>Project Data</legend>
+								<h:panelGrid columns="2">
+									<h:outputLabel value="ID" for="id" rendered="#{projectBean.project.id != null}"/>
+									<h:inputText id="id" value="#{projectBean.project.id}" rendered="#{projectBean.project.id != null}"  readonly="true"/>
+									
+									<h:outputLabel value="Name" for="name"/>
+									<h:inputText id="name" value="#{projectBean.project.name}"/>
+									
+									<h:outputLabel value="Description" for="description"/>
+									<h:inputText id="description" value="#{projectBean.project.description}"/>
+									
+									<h:outputLabel value="Sponsor" for="sponsor"/>
+									<h:inputText id="sponsor" value="#{projectBean.project.sponsor}"/>
+									
+									<h:outputLabel value="Start Date" for="startDate"/>
+									<p:calendar id="startDate" value="#{projectBean.project.startDate}" showOn="button" pattern="dd/MM/yyyy"/>
+									
+									<h:outputLabel value="End Date" for="endDate"/>
+									<p:calendar id="endDate" value="#{projectBean.project.endDate}" showOn="button" pattern="dd/MM/yyyy"/>
+									
+									<h:outputLabel value="Status"/>
+									<h:selectOneMenu value="#{projectBean.project.projectStatus}">
+										<f:selectItem itemLabel="Select..." itemValue=""/>
+										<f:selectItems value="#{projectBean.projectStatuses}" var="ps" itemValue="#{ps}" itemLabel="#{ps.label}"/>
+									</h:selectOneMenu>
+									
+									<h:commandButton value="Save" action="#{projectBean.save}"/>
+								</h:panelGrid>
+							</fieldset>
+						</h:form>
+						
+						<h2>Projects List</h2>
+						<h:form id="table">
+							<h:dataTable value="#{projectBean.projects}" var="project" styleClass="data" rowClasses="odd,even">
+								<h:column>
+									<f:facet name="header">
+										<h:outputText value="Name"/>
+									</f:facet>
+									<h:outputText value="#{project.name}"/>
+								</h:column>
+								
+								<h:column>
+									<f:facet name="header">
+										<h:outputText value="Description"/>
+									</f:facet>
+									<h:outputText value="#{project.description}"/>
+								</h:column>
+								
+								<h:column>
+									<f:facet name="header">
+										<h:outputText value="Sponsor"/>
+									</f:facet>
+									<h:outputText value="#{project.sponsor}"/>
+								</h:column>
+								
+								<h:column>
+									<f:facet name="header">
+										<h:outputText value="Start Date"/>
+									</f:facet>
+									<h:outputText value="#{project.startDate}">
+										<f:convertDateTime timeZone="GMT-4" pattern="dd/MM/yyyy"/>
+									</h:outputText>
+								</h:column>
+								
+								<h:column>
+									<f:facet name="header">
+										<h:outputText value="End Date"/>
+									</f:facet>
+									<h:outputText value="#{project.endDate}">
+										<f:convertDateTime timeZone="GMT-4" pattern="dd/MM/yyyy"/>
+									</h:outputText>
+								</h:column>
+								
+								<h:column>
+									<f:facet name="header">
+										<h:outputText value="Status"/>
+									</f:facet>
+									<h:outputText value="#{project.projectStatus.label}"/>
+								</h:column>
+								
+								<h:column>
+									<f:facet name="header">
+										<h:outputText value="Actions"/>
+									</f:facet>
+									<h:commandLink action="#{projectBean.delete}" value="Delete">
+										<f:ajax render="@form"/>
+										<f:setPropertyActionListener value="#{project}" target="#{projectBean.project}" />
+									</h:commandLink>
+								</h:column>
+								
+								<h:column>
+									<h:commandLink value="Update">
+										<f:setPropertyActionListener value="#{project}" target="#{projectBean.project}" />
+									</h:commandLink>
+								</h:column>
+							</h:dataTable>
+						</h:form>
+					</div>
+				</div>
+			</ui:define>
+		</ui:composition>
+	</h:body>
+</html>

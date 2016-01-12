@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<f:view contentType="text/html"/>
+	
+	<h:head>
+		<title>Scrum Task Board</title>
+		<h:outputStylesheet library="css" name="grid.css"/>
+		<!-- <h:outputStylesheet library="css" name="datatable.css"/> -->
+		<h:outputStylesheet library="css" name="style.css"/>
+		
+	</h:head>
+	
+	<h:body>
+		<div id="header">
+			<div class="container">
+				<!-- <h:graphicImage library="images" name="belmonte_logo_scrum.jpg" id="companyLogo" height="60" width="257" /> -->
+				<h:graphicImage library="images" name="belmonte_logo_scrum.jpg" id="companyLogo" height="60" width="132" />
+			</div>
+			<div id="loggedUser">
+				Logged user:
+				<h:outputText value="#{loginBean.user.login}"/>
+			</div>
+		</div>
+		<div id="content">
+			<div class="container">
+				<ui:insert name="content"/>
+			</div>
+		</div>
+		<div id="footer">
+			<div class="container">
+				<p>Copyright 2016. All rights reserved.</p>
+			</div>
+		</div>
+	</h:body>
+</html>
