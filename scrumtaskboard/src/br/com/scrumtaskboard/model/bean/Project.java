@@ -1,7 +1,7 @@
 package br.com.scrumtaskboard.model.bean;
 
 import java.util.ArrayList;
-import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -19,13 +19,13 @@ public class Project {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 	
 	private String name;
 	private String description;
 	private String sponsor;
-	private Calendar startDate;
-	private Calendar endDate;
+	private Date startDate;
+	private Date endDate;
 	
 	@Enumerated(EnumType.STRING)
 	private ProjectStatus projectStatus;
@@ -38,15 +38,6 @@ public class Project {
 	
 	@OneToMany(mappedBy = "project")
 	private List<Sprint> sprints = new ArrayList<Sprint>();
-	
-//	@OneToMany(mappedBy = "sprint")
-//	private List<UserStory> userStories = new ArrayList<UserStory>();
-//	
-//	@OneToMany(mappedBy = "sprint")
-//	private List<Task> tasks = new ArrayList<Task>();
-//	
-//	@OneToMany(mappedBy = "sprint")
-//	private List<Bug> bugs = new ArrayList<Bug>();
 	
 	public List<Issue> getIssues() {
 		return issues;
@@ -64,7 +55,7 @@ public class Project {
 		this.sprints = sprints;
 	}
 	
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 	
@@ -100,19 +91,19 @@ public class Project {
 		this.sponsor = sponsor;
 	}
 	
-	public Calendar getStartDate() {
+	public Date getStartDate() {
 		return startDate;
 	}
 	
-	public void setStartDate(Calendar startDate) {
+	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
 	
-	public Calendar getEndDate() {
+	public Date getEndDate() {
 		return endDate;
 	}
 	
-	public void setEndDate(Calendar endDate) {
+	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
 	
@@ -131,29 +122,4 @@ public class Project {
 	public void setRoles(List<Role> roles) {
 		this.roles = roles;
 	}
-
-//	public List<UserStory> getUserStories() {
-//		return userStories;
-//	}
-//
-//	public void setUserStories(List<UserStory> userStories) {
-//		this.userStories = userStories;
-//	}
-//
-//	public List<Task> getTasks() {
-//		return tasks;
-//	}
-//
-//	public void setTasks(List<Task> tasks) {
-//		this.tasks = tasks;
-//	}
-//
-//	public List<Bug> getBugs() {
-//		return bugs;
-//	}
-//
-//	public void setBugs(List<Bug> bugs) {
-//		this.bugs = bugs;
-//	}
-	
 }
